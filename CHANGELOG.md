@@ -1,10 +1,24 @@
-
-# ✅ English CHANGELOG（Refined）
-
-```markdown
 # Changelog
 
 All notable changes to this project are documented here.
+
+---
+
+## [0.5.2] - 2026-03-30
+
+### Added
+- Integration test suite: `test/integration/dgc.test.ts`
+  - Phase A: `emit() -> applyBatch() -> GraphStore` validation (3 tests)
+  - Phase B: cross-graph edge resolution via `depends_on` (1 test)
+- `lint.ts` module — validates DGC GraphStore after emit bridge
+- `asEdgeId` import from DGC for edge construction in tests
+
+### Changed
+- `emit.ts` — Added `store?: GraphStore` field to `EmitResult` type for integration testing
+
+### Tests
+- **59 passed** (55 unit + 4 integration)
+- Integration flow: emit → applyBatch → store verified end-to-end
 
 ---
 
@@ -95,4 +109,3 @@ All notable changes to this project are documented here.
 - `replay()`
 - `TraceOSError`
 - Golden Fixtures (S01–S06)
-

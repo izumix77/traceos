@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+---
+
+## [0.5.2] - 2026-03-30
+
+### Added
+- 統合テストスイート: `test/integration/dgc.test.ts`
+  - Phase A: `emit() → applyBatch() → GraphStore` 検証 (3 テスト)
+  - Phase B: `depends_on` によるクロスグラフエッジ解決 (1 テスト)
+- `lint.ts` モジュール — emit bridge 後の DGC GraphStore 検証
+- テスト用の `asEdgeId` インポート (DGC から)
+
+### Changed
+- `emit.ts` — `EmitResult` 型に `store?: GraphStore` フィールドを追加（統合テスト用）
+
+### Tests
+- **59 passed** (55 unit + 4 integration)
+- 統合フロー検証: emit → applyBatch → store 全体が end-to-end で確認済み
+
+---
+
 ## [0.5.1] - 2026-03-30
 
 ### Fixed
