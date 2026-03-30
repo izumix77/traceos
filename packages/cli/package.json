@@ -1,0 +1,25 @@
+{
+  "name": "@traceos/cli",
+  "version": "0.5.0",
+  "description": "CLI for @traceos/core — traceos emit / log / replay / why / audit",
+  "type": "module",
+  "license": "Apache-2.0",
+  "bin": {
+    "traceos": "./dist/index.js"
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build":     "tsc -b",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean":     "rm -rf dist"
+  },
+  "dependencies": {
+  "@traceos/core": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": ">=5.4.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

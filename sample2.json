@@ -1,0 +1,31 @@
+{
+  "eventId": "018f4c2e-7b8c-7d4a-b123-8f1e6b2a9c02",
+  "createdAt": "2026-03-29T01:00:00.000Z",
+  "author": "github:you",
+  "authorMeta": {
+    "authorId": "github:you",
+    "authorType": "human"
+  },
+  "type": "create.node",
+  "source": "manual:test",
+  "produces": {
+    "graphId": "G:test",
+    "ops": [
+      {
+        "type": "add_node",
+        "node": {
+          "id": "N:test-001",
+          "kind": "Test",
+          "createdAt": "2026-03-29T01:00:00.000Z",
+          "author": "github:you"
+        }
+      },
+      {
+        "type": "commit",
+        "commitId": "C:test-001",
+        "createdAt": "2026-03-29T01:00:00.000Z",
+        "author": "github:you"
+      }
+    ]
+  }
+}

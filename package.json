@@ -1,0 +1,18 @@
+{
+  "name": "traceos",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "typecheck": "pnpm --filter @traceos/core typecheck",
+    "test": "pnpm --filter @traceos/core test",
+    "build": "pnpm --filter @traceos/core build"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "rimraf": "^6.1.3",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "uuid": "^13.0.0"
+  }
+}

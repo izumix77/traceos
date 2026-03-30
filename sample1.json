@@ -1,0 +1,11 @@
+{
+  "eventId": "018f4c2e-7b8c-7d4a-b123-8f1e6b2a9c01",
+  "createdAt": "2026-03-29T00:00:00.000Z",
+  "author": "github:you",
+  "authorMeta": {
+    "authorId": "github:you",
+    "authorType": "human"
+  },
+  "type": "test.event",
+  "payload": {}
+}
