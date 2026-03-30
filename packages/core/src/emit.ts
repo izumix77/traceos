@@ -12,6 +12,7 @@
 // "TraceOS は証拠を拒否しない"
 // DGC の PolicyViolation は事実の記録を妨げない。警告として残す。
 
+import { lintStore } from "./lint.js"; // lintStore を import
 import { applyBatch, emptyGraph } from "@decisiongraph/core";
 import type { GraphStore, GraphId } from "@decisiongraph/core";
 
