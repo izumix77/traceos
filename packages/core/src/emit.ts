@@ -13,7 +13,7 @@
 // DGC の PolicyViolation は事実の記録を妨げない。警告として残す。
 
 import { applyBatch, emptyGraph } from "@decisiongraph/core";
-import type { GraphId } from "@decisiongraph/core";
+import type { GraphStore, GraphId } from "@decisiongraph/core";
 
 import type { DecisionEvent } from "./domain/types.js";
 import type { TraceOSRuntime } from "./runtime.js";
@@ -31,8 +31,8 @@ export type DGCBridgeResult = {
 export type EmitResult = {
   eventId:  EventId;
   appended: boolean;
-  // undefined = pure causal event (no produces). Not optional — always present.
   dgc:      DGCBridgeResult | undefined;
+  store?:   GraphStore;  // ← 追加
   warnings: TraceOSWarning[];
 };
 
@@ -203,5 +203,11 @@ export function emit(
     });
   }
 
-  return { eventId: event.eventId, appended: true, dgc: dgcResult, warnings };
+  return {
+  eventId: event.eventId,
+  appended: true,
+  dgc: dgcResult,
+  store: runtime.dgcStore,
+  warnings
+};
 }
