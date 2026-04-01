@@ -14,7 +14,7 @@ import {
   buildIndexes,
   whyExists,
   whyChanged,
-} from "@traceos/core";
+} from "@trace-os/core";
 
 export type WhyOptions = {
   dir:     string;

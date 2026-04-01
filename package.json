@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "typecheck": "pnpm --filter @traceos/core typecheck",
-    "test": "pnpm --filter @traceos/core test",
-    "build": "pnpm --filter @traceos/core build"
+    "typecheck": "pnpm --filter @trace-os/core typecheck",
+    "test": "pnpm --filter @trace-os/core test",
+    "build": "pnpm --filter @trace-os/core build"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",

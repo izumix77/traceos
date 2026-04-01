@@ -1,7 +1,7 @@
 # TraceOS — TODO
 
 最終更新: 2026-03-30
-現在地: `@traceos/core` v0.5.2 — Phase A–B 統合テスト通過済み
+現在地: `@trace-os/core` v0.5.2 — Phase A–B 統合テスト通過済み
 
 ---
 
@@ -10,7 +10,7 @@
 ### 1. `pnpm build` を通す
 - [ ] `tsc -b` で `dist/` を生成する
 - [ ] `dist/index.js` / `dist/index.d.ts` が正しく出力されることを確認
-- [ ] 他パッケージから `@traceos/core` として参照できる形にする
+- [ ] 他パッケージから `@trace-os/core` として参照できる形にする
 
 ### 2. FlowMemo への接続
 - [ ] FlowMemo の React UI から `FlowMemoConnector.emitReviewComment()` を呼ぶ
@@ -64,7 +64,7 @@
 - [ ] "Cross-organization responsibility clearing layer" — TraceMemory を通じた責任の clearing
 - [ ] 規制要件との対応（AI Act, GDPR）
 
-### 8. `@traceos/io-json` Phase 2 本実装
+### 8. `@trace-os/io-json` Phase 2 本実装
 - [ ] `JSONFileAdapter` の正式な encode / decode 仕様
 - [ ] `traceos emit` CLI で JSON ファイルを読んで emit できるようにする
 - [ ] バージョン管理（`version: "0.6"` フィールド）
@@ -91,8 +91,8 @@
 - [ ] AI 推論監査: 思考 → 決定の完全チェーン
 
 ### 12. エコシステム整備
-- [ ] `@traceos/core` を npm publish
-- [ ] `@traceos/cli` を npm publish（`npx traceos` で動くように）
+- [ ] `@trace-os/core` を npm publish
+- [ ] `@trace-os/cli` を npm publish（`npx traceos` で動くように）
 - [ ] GitHub Actions CI（`pnpm test` + `pnpm typecheck`）
 - [ ] Constitution v0.6 の英語正式版ドキュメント公開
 

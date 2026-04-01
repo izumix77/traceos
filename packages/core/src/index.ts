@@ -1,4 +1,4 @@
-// @traceos/core — public API
+// @trace-os/core — public API
 // Constitution v0.6 / Apache 2.0
 
 // ── domain ──────────────────────────────────────────────────────────────────

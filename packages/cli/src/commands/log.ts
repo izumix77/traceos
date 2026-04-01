@@ -6,8 +6,8 @@
 //   traceos log --dir .traceos/events --type ArchitectureDecision
 //   traceos log --dir .traceos/events --author github:alice
 
-import { createJSONFileRuntime } from "@traceos/core";
-import type { EventFilter } from "@traceos/core";
+import { createJSONFileRuntime } from "@trace-os/core";
+import type { EventFilter } from "@trace-os/core";
 
 export type LogOptions = {
   dir:         string;

@@ -1,14 +1,14 @@
 # TraceOS — Implementation Status
 
 **Date:** 2026-03-27
-**Version:** @traceos/core v0.5.0
+**Version:** @trace-os/core v0.5.0
 **Test Status:** 55 passed, 0 failed
 
 ---
 
 ## 実装済み（Phase 1〜5）
 
-### @traceos/core
+### @trace-os/core
 
 | Layer | Module | Status |
 |---|---|---|
@@ -23,7 +23,7 @@
 | Connectors | `FlowMemoConnector` `ClaimAtomConnector` `CausalFlowConnector` | ✅ |
 | Causality | `buildCausality` `traceRootCause` `traceResponse` `traceLineage` | ✅ |
 
-### @traceos/cli (5 commands)
+### @trace-os/cli (5 commands)
 
 | Command | Description | Status |
 |---|---|---|
@@ -57,8 +57,8 @@
 ### FlowMemo（Edge重記モード）
 
 ```typescript
-import { createJSONFileRuntime } from "@traceos/core";
-import { FlowMemoConnector } from "@traceos/core";
+import { createJSONFileRuntime } from "@trace-os/core";
+import { FlowMemoConnector } from "@trace-os/core";
 import { ConstitutionalPolicy } from "@decisiongraph/core";
 
 const runtime   = createJSONFileRuntime({ dir: ".traceos/events" });
@@ -80,7 +80,7 @@ connector.emitReviewComment({
 ### ClaimAtom（崩壊検知）
 
 ```typescript
-import { ClaimAtomConnector } from "@traceos/core";
+import { ClaimAtomConnector } from "@trace-os/core";
 
 const ca = new ClaimAtomConnector();
 
@@ -119,7 +119,7 @@ ca.emitCollapseDetected({
 
 ### 中期
 
-4. **@traceos/io-json** — Phase 2 stub を本実装に
+4. **@trace-os/io-json** — Phase 2 stub を本実装に
 5. **TraceID Registry Phase 1** — ID 発行 + lifecycle evidence
 6. **ClaimAtom Intelligent Alert** — DGC `lintStore()` → CollapseDetected → AI解釈
 
@@ -130,7 +130,7 @@ ca.emitCollapseDetected({
 ```
 ClaimAtom / FlowMemo / CausalFlow / DecisionRoom
     ↓ uses
-@traceos/core  (v0.5.0 — 実装済み)
+@trace-os/core  (v0.5.0 — 実装済み)
     ↓ uses
 @decisiongraph/core  (v0.4.x — npm 登録済み)
 ```
@@ -138,5 +138,5 @@ ClaimAtom / FlowMemo / CausalFlow / DecisionRoom
 ```
 TraceMemory (未実装)
     ↓ routing/clearing
-@traceos/core  →  各組織の EventLog（ローカル）
+@trace-os/core  →  各組織の EventLog（ローカル）
 ```

@@ -1,4 +1,4 @@
-# @traceos/core
+# @trace-os/core
 
 > append-only causal evidence ledger
 > "Truth emerges outside the kernel."
@@ -25,14 +25,14 @@ TraceID Registry  = WHO did it（ID エンジン）
 ClaimAtom         = WHAT IT MEANS（意味エンジン）
 ```
 
-`@traceos/core` はカーネル層です。DGC を fork せず import します。
+`@trace-os/core` はカーネル層です。DGC を fork せず import します。
 
 ---
 
 ## Install
 
 ```bash
-npm install @traceos/core @decisiongraph/core
+npm install @trace-os/core @decisiongraph/core
 ```
 
 ---
@@ -50,7 +50,7 @@ import {
   traceRootCause,
   asEventId,
   asAuthorId,
-} from "@traceos/core";
+} from "@trace-os/core";
 import { ConstitutionalPolicy, asGraphId, asNodeId, asCommitId } from "@decisiongraph/core";
 
 const policy  = new ConstitutionalPolicy();
@@ -98,13 +98,13 @@ const runtime = createRuntime({ policy });
 
 ### JSON ファイル（Git 管理可能）
 ```typescript
-import { createJSONFileRuntime } from "@traceos/core";
+import { createJSONFileRuntime } from "@trace-os/core";
 const runtime = createJSONFileRuntime({ dir: ".traceos/events", policy });
 ```
 
 ### SQLite（Node.js 22+、高速クエリ）
 ```typescript
-import { createSQLiteRuntime } from "@traceos/core";
+import { createSQLiteRuntime } from "@trace-os/core";
 const runtime = createSQLiteRuntime({ dbPath: ".traceos/events.db", policy });
 ```
 
@@ -115,7 +115,7 @@ const runtime = createSQLiteRuntime({ dbPath: ".traceos/events.db", policy });
 ドメインアプリごとにコネクターが用意されています。
 
 ```typescript
-import { FlowMemoConnector, CausalFlowConnector, ClaimAtomConnector } from "@traceos/core";
+import { FlowMemoConnector, CausalFlowConnector, ClaimAtomConnector } from "@trace-os/core";
 
 // FlowMemo
 const flowMemo = new FlowMemoConnector();
@@ -137,7 +137,7 @@ ca.emitLegalClaim({ domain: "legal", caseRef: "gdpr:article-6:v4", ... }, runtim
 ## Phase 5: Causality Engine
 
 ```typescript
-import { buildCausality, traceRootCause, traceResponse, traceLineage } from "@traceos/core";
+import { buildCausality, traceRootCause, traceResponse, traceLineage } from "@trace-os/core";
 
 const causality = buildCausality(runtime.eventStore.readAll());
 
@@ -156,7 +156,7 @@ const lineage = traceLineage(updateEventId, causality, runtime.eventStore);
 ## CLI
 
 ```bash
-npm install -g @traceos/cli
+npm install -g @trace-os/cli
 
 traceos emit    event.json  --dir .traceos/events
 traceos log                 --dir .traceos/events --type ArchitectureDecision
@@ -184,7 +184,7 @@ Application Layer  (DecisionRoom / FlowOS / ClaimAtom)
       ↓
 Connectors         (FlowMemoConnector / ClaimAtomConnector / CausalFlowConnector)
       ↓
-@traceos/core
+@trace-os/core
   ├── emit()            validate → append → DGC bridge
   ├── replay()          append order → GraphStore 再構築
   ├── buildIndexes()    Node/Edge/Commit インデックス

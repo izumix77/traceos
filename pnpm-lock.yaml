@@ -24,7 +24,7 @@ importers:
 
   packages/cli:
     dependencies:
-      '@traceos/core':
+      '@trace-os/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:

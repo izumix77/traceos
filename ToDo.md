@@ -3,7 +3,7 @@
 TraceOS is evolving from a causal logging system into a responsibility infrastructure.
 
 Last updated: 2026-03-30
-Current status: `@traceos/core` v0.5.2 — Phase A–B integration tests passing
+Current status: `@trace-os/core` v0.5.2 — Phase A–B integration tests passing
 
 ---
 
@@ -12,7 +12,7 @@ Current status: `@traceos/core` v0.5.2 — Phase A–B integration tests passing
 ### 1. Ensure build output integrity
 - [ ] Run `pnpm build` and verify `dist/` artifacts
 - [ ] Confirm `dist/index.js` and `dist/index.d.ts` are generated correctly
-- [ ] Ensure other packages can consume `@traceos/core` via workspace resolution
+- [ ] Ensure other packages can consume `@trace-os/core` via workspace resolution
 
 ---
 
@@ -79,7 +79,7 @@ Current status: `@traceos/core` v0.5.2 — Phase A–B integration tests passing
 
 ---
 
-### 8. `@traceos/io-json` Phase 2
+### 8. `@trace-os/io-json` Phase 2
 - [ ] Finalize JSON encode/decode specification
 - [ ] Enable CLI `traceos emit` to read structured JSON events
 - [ ] Introduce versioning (`version: "0.6"`)
@@ -121,8 +121,8 @@ Current status: `@traceos/core` v0.5.2 — Phase A–B integration tests passing
 ---
 
 ### 12. Ecosystem development
-- [ ] Publish `@traceos/core` to npm
-- [ ] Publish `@traceos/cli` (`npx traceos`)
+- [ ] Publish `@trace-os/core` to npm
+- [ ] Publish `@trace-os/cli` (`npx traceos`)
 - [ ] GitHub Actions CI:
   - `pnpm test`
   - `pnpm typecheck`

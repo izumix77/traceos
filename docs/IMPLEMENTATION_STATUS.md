@@ -1,7 +1,7 @@
 # TraceOS — Implementation Status
 
 **Date:** 2026-03-27
-**Version:** @traceos/core v0.5.0
+**Version:** @trace-os/core v0.5.0
 **Test Status:** 55 passed, 0 failed
 
 ---
@@ -16,7 +16,7 @@ TraceOS is designed as an **append-only causal evidence ledger**, focusing on re
 
 ## Implemented (Phase 1–5)
 
-### @traceos/core
+### @trace-os/core
 
 | Layer            | Module                                                              | Status |
 | ---------------- | ------------------------------------------------------------------- | ------ |
@@ -33,7 +33,7 @@ TraceOS is designed as an **append-only causal evidence ledger**, focusing on re
 
 ---
 
-### @traceos/cli
+### @trace-os/cli
 
 | Command          | Description                   | Status |
 | ---------------- | ----------------------------- | ------ |
@@ -107,7 +107,7 @@ ca.emitCollapseDetected({
 
 ### Mid-term
 
-* `@traceos/io-json` full implementation
+* `@trace-os/io-json` full implementation
 * TraceID Registry Phase 1
 * ClaimAtom Intelligent Alert pipeline
 
@@ -118,7 +118,7 @@ ca.emitCollapseDetected({
 ```
 Applications (FlowMemo / ClaimAtom / DecisionRoom)
         ↓
-@traceos/core
+@trace-os/core
         ↓
 @decisiongraph/core
 ```

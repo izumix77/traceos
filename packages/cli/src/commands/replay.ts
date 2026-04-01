@@ -5,7 +5,7 @@
 //   traceos replay --dir .traceos/events --at C:commit-001
 //   traceos replay --dir .traceos/events --json
 
-import { createJSONFileRuntime, replay, buildIndexes } from "@traceos/core";
+import { createJSONFileRuntime, replay, buildIndexes } from "@trace-os/core";
 
 export type ReplayOptions = {
   dir:   string;

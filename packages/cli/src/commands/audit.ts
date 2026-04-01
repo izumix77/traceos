@@ -14,7 +14,7 @@ import {
   buildIndexes,
   auditExportJSON,
   auditExportReport,
-} from "@traceos/core";
+} from "@trace-os/core";
 
 export type AuditOptions = {
   dir:   string;

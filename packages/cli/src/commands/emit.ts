@@ -3,8 +3,8 @@
 import * as fs   from "fs";
 import * as path from "path";
 
-import { emit, createJSONFileRuntime, TraceOSError } from "@traceos/core";
-import type { DecisionEvent } from "@traceos/core";
+import { emit, createJSONFileRuntime, TraceOSError } from "@trace-os/core";
+import type { DecisionEvent } from "@trace-os/core";
 
 export type EmitOptions = {
   dir:    string;
