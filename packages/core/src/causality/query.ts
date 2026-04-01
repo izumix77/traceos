@@ -37,8 +37,13 @@ export function traceRootCause(
   const roots:    DecisionEvent[] = [];
   const visited   = new Set<string>();
 
-  function dfs(eid: string): void {
-    if (visited.has(eid)) return;
+  // Iterative DFS using an explicit stack to avoid call-stack overflow on
+  // deep causality chains (e.g. 10,000+ linked "causes" edges).
+  const stack: string[] = [String(eventId)];
+
+  while (stack.length > 0) {
+    const eid = stack.pop()!;
+    if (visited.has(eid)) continue;
     visited.add(eid);
 
     const event = eventMap.get(eid);
@@ -53,12 +58,11 @@ export function traceRootCause(
       if (event !== undefined) roots.push(event);
     } else {
       for (const edge of incoming) {
-        dfs(String(edge.from));
+        stack.push(String(edge.from));
       }
     }
   }
 
-  dfs(String(eventId));
   return { path, roots };
 }
 

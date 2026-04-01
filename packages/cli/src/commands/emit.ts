@@ -12,11 +12,31 @@ export type EmitOptions = {
   quiet:  boolean;
 };
 
+// Maximum allowed size for an event JSON file (1 MiB).
+// Prevents memory exhaustion from unexpectedly large files.
+const MAX_EVENT_FILE_BYTES = 1 * 1024 * 1024;
+
 export async function cmdEmit(eventFile: string, opts: EmitOptions): Promise<void> {
   const filepath = path.resolve(eventFile);
 
   if (!fs.existsSync(filepath)) {
     console.error(`✗ File not found: ${filepath}`);
+    process.exit(1);
+  }
+
+  // Guard: reject non-regular files (e.g. devices, FIFOs) before reading.
+  const stat = fs.statSync(filepath);
+  if (!stat.isFile()) {
+    console.error(`✗ Not a regular file: ${filepath}`);
+    process.exit(1);
+  }
+
+  // Guard: reject oversized files before loading into memory.
+  if (stat.size > MAX_EVENT_FILE_BYTES) {
+    console.error(
+      `✗ File too large: ${stat.size} bytes (max ${MAX_EVENT_FILE_BYTES} bytes). ` +
+      `Event JSON must be under 1 MiB.`
+    );
     process.exit(1);
   }
 

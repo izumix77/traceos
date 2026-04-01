@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [0.5.3] - 2026-04-02
+
+### セキュリティ
+- `emit.ts` — UUID v7 正規表現: `/i` フラグを削除し、RFC 9562 の小文字限定フォーマットを強制
+- `emit.ts` — 文字列フィールドのバリデーション: `author`・`authorMeta.authorId`・`createdAt` の存在チェックを `!value` から明示的な `typeof` ガードに変更し、`null`/オブジェクト型の誤通過を防止
+- `store/sqliteAdapter.ts` — `source` フィルタの SQL `LIKE` 特殊文字（`%`・`_`・`\`）をエスケープ処理し、意図しないワイルドカードマッチを防止
+- `causality/query.ts` — `traceRootCause()` の再帰 DFS を明示的スタックを使った反復処理に変換し、深い因果チェーン（10,000+ エッジ）でのスタックオーバーフローを防止
+- `causality/buildCausality.ts` — `LineageId` 生成のハッシュを djb2（32-bit）から `node:crypto` SHA-256（64-bit、16 hex 文字）に置き換え、衝突リスクを排除
+- `store/eventStore.ts` — `createEventStore()` にオプションの `maxSize` を追加し、インメモリのイベント数上限を設定可能に（メモリ枯渇防止）
+- `replay.ts` — `ReplayOptions` にオプションの `maxEvents` を追加。上限到達時は残りのイベントをスキップし `REPLAY_MAX_EVENTS_EXCEEDED` 警告を返す
+- `audit/export.ts` — `auditExportJSON()` に `AuditExportOptions.includePayload`（デフォルト `true`）を追加。非特権コンシューマへの開示前に `payload` フィールドを除外可能に
+- `packages/cli` — `traceos emit` のイベント JSON 読み込み前に、ファイルサイズ上限（1 MiB）と `statSync` による非通常ファイル拒否を追加
+- `SECURITY.md` — 新規ドキュメントを追加: payload サニタイズ契約・並行性モデル（シングルスレッド前提）・Brand 型のトラストバウンダリ・AuthorId のクレーム意味論・パスセキュリティ・監査エクスポートの情報漏洩対策
+- `errors.ts` — `REPLAY_MAX_EVENTS_EXCEEDED` を `TraceOSWarningCode` に追加
+- `domain/ids.ts` — `as*` キャスト関数がランタイム検証を行わない旨を明記した JSDoc セキュリティノートを追加
+- `index.ts` — `AuditExportOptions` 型をエクスポート
+
+### テスト
+- **59 passed**（リグレッションなし）
+
+---
+
 ## [0.5.2] - 2026-03-30
 
 ### Added
@@ -25,7 +47,7 @@ All notable changes to this project will be documented in this file.
 ## [0.5.1] - 2026-03-30
 
 ### Fixed
-- `emit()`: `EDGE_INVALID_TYPE` チェックが抜けていた — `EventEdge.type` の closed set 検証を追加（Constitution §7）
+- `emit()`: `EDGE_INVALID_TYPaE` チェックが抜けていた — `EventEdge.type` の closed set 検証を追加（Constitution §7）
 - `emit()`: EventEdge バリデーション順序を整理 — `EDGE_SELF_REFERENCE` → `EDGE_INVALID_TYPE` → `EDGE_TO_MISMATCH` → `EDGE_FORWARD_REFERENCE`
 
 ### Added

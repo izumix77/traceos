@@ -35,7 +35,8 @@ export class TraceOSError extends Error {
 
 export type TraceOSWarningCode =
   | "DGC_POLICY_VIOLATION"          // DGC applyBatch が violation を返した
-  | "CREATED_AT_SUSPICIOUS";        // createdAt が現在時刻から大きく外れている
+  | "CREATED_AT_SUSPICIOUS"         // createdAt が現在時刻から大きく外れている
+  | "REPLAY_MAX_EVENTS_EXCEEDED";   // replay() が maxEvents 上限に達してイベントをスキップした
 
 export type TraceOSWarning = {
   code:    TraceOSWarningCode;

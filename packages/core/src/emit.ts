@@ -40,8 +40,9 @@ export type EmitResult = {
 // ── UUIDv7 形式チェック ──────────────────────────────────────────────────────
 // RFC 9562 — UUIDv7: version bits = 0111 (7), variant bits = 10xx
 
+// RFC 9562 §6.1 requires lowercase hex digits. No /i flag.
 const UUID_V7_RE =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 
 function isUUIDv7(s: string): boolean {
   return UUID_V7_RE.test(s);
@@ -78,8 +79,8 @@ export function emit(
     );
   }
 
-  // author 必須
-  if (!event.author || String(event.author).trim() === "") {
+  // author 必須（typeof チェックで null/object 等の誤った型を排除）
+  if (typeof event.author !== "string" || event.author.trim() === "") {
     throw new TraceOSError(
       "AUTHOR_REQUIRED",
       "event.author must not be empty",
@@ -89,8 +90,8 @@ export function emit(
 
   // authorMeta.authorId 必須
   if (
-    !event.authorMeta.authorId ||
-    String(event.authorMeta.authorId).trim() === ""
+    typeof event.authorMeta?.authorId !== "string" ||
+    event.authorMeta.authorId.trim() === ""
   ) {
     throw new TraceOSError(
       "AUTHOR_REQUIRED",
@@ -100,7 +101,7 @@ export function emit(
   }
 
   // createdAt 必須
-  if (!event.createdAt || String(event.createdAt).trim() === "") {
+  if (typeof event.createdAt !== "string" || event.createdAt.trim() === "") {
     throw new TraceOSError(
       "CREATED_AT_REQUIRED",
       "event.createdAt must not be empty",

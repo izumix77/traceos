@@ -16,6 +16,8 @@ class InMemoryAdapter implements EventStoreAdapter {
   // Map は挿入順を保証する（ES2015+仕様）→ append order が自動的に canonical
   private readonly store = new Map<string, DecisionEvent>();
 
+  constructor(private readonly maxSize?: number) {}
+
   append(event: DecisionEvent): void {
     // 重複チェックは emit() の責務。ここでは assert のみ。
     if (this.store.has(String(event.eventId))) {
@@ -24,6 +26,16 @@ class InMemoryAdapter implements EventStoreAdapter {
         `Caller (emit) should have checked this.`
       );
     }
+
+    // メモリ枯渇防止: maxSize を超える場合は append を拒否する。
+    // 本番規模のデータには JSONFile または SQLite アダプタを使用すること。
+    if (this.maxSize !== undefined && this.store.size >= this.maxSize) {
+      throw new Error(
+        `[InMemoryAdapter] maxSize (${this.maxSize}) reached. ` +
+        `Use a persistent adapter (JSONFile or SQLite) for large event stores.`
+      );
+    }
+
     this.store.set(String(event.eventId), event);
   }
 
@@ -63,8 +75,8 @@ class InMemoryAdapter implements EventStoreAdapter {
 
 // ── createEventStore() ───────────────────────────────────────────────────────
 // Phase 1 では InMemoryAdapter を返す。
-// 将来は adapter を引数で受け取るように拡張する。
+// maxSize を指定するとイベント数の上限を設ける（省略時は無制限）。
 
-export function createEventStore(): EventStoreAdapter {
-  return new InMemoryAdapter();
+export function createEventStore(options?: { maxSize?: number }): EventStoreAdapter {
+  return new InMemoryAdapter(options?.maxSize);
 }

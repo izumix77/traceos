@@ -89,7 +89,7 @@ export type {
 
 // ── Phase 4: Audit Export ─────────────────────────────────────────────────────
 export { auditExportJSON, auditExportReport } from "./audit/export.js";
-export type { AuditJSON, GraphSummary, AuditReportOptions } from "./audit/export.js";
+export type { AuditJSON, AuditExportOptions, GraphSummary, AuditReportOptions } from "./audit/export.js";
 
 // ── Phase 5: Causality Engine ─────────────────────────────────────────────────
 export type {

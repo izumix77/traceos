@@ -24,6 +24,17 @@ export type AuditJSON = {
   events:       DecisionEvent[];
 };
 
+// オプション: 機密フィールドの除外を制御する
+export type AuditExportOptions = {
+  /**
+   * false にすると各イベントの `payload` フィールドを除外して出力する。
+   * payload には任意のドメインデータが含まれる可能性があるため、
+   * 外部システムや非特権ユーザーへの開示前に除外を検討すること。
+   * デフォルト: true（後方互換性のため）
+   */
+  includePayload?: boolean;
+};
+
 export type GraphSummary = {
   graphId:     string;
   nodeCount:   number;
@@ -33,11 +44,17 @@ export type GraphSummary = {
 };
 
 export function auditExportJSON(
-  store:   EventReader,
+  store:    EventReader,
   dgcStore: GraphStore,
-  indexes: GraphIndexes
+  indexes:  GraphIndexes,
+  options:  AuditExportOptions = {}
 ): AuditJSON {
-  const events = [...store.readAll()];
+  const { includePayload = true } = options;
+  const rawEvents = [...store.readAll()];
+  // payload を除外する場合はフィールドを削除したコピーを作成する
+  const events: DecisionEvent[] = includePayload
+    ? rawEvents
+    : rawEvents.map(({ payload: _p, ...rest }) => rest as DecisionEvent);
   const graphSummary: GraphSummary[] = [];
 
   for (const [gid, graph] of Object.entries(dgcStore.graphs)) {

@@ -22,6 +22,10 @@ export type ReplayOptions = {
   // replayAt: 指定した eventId まで適用して停止（Constitution §5 の as-of 境界）
   // 未指定の場合は全 event を適用する
   replayAt?: string; // EventId
+  // maxEvents: 処理するイベント数の上限（省略時は無制限）。
+  // 超過した場合は REPLAY_MAX_EVENTS_EXCEEDED 警告を返し、残りをスキップする。
+  // メモリ枯渇防止のための安全弁として使用する。
+  maxEvents?: number;
 };
 
 // ── replay() ─────────────────────────────────────────────────────────────────
@@ -39,6 +43,17 @@ export function replay(
   const appliedEvents: DecisionEvent[] = [];
 
   for (const event of events) {
+    // maxEvents ガード: 上限を超えたら残りをスキップして警告を追加する
+    if (options.maxEvents !== undefined && appliedEvents.length >= options.maxEvents) {
+      warnings.push({
+        code:    "REPLAY_MAX_EVENTS_EXCEEDED",
+        message: `replay() stopped after ${options.maxEvents} events (maxEvents limit reached). ` +
+                 `${events.length - appliedEvents.length} event(s) were skipped.`,
+        context: { maxEvents: options.maxEvents, total: events.length, applied: appliedEvents.length },
+      });
+      break;
+    }
+
     appliedEvents.push(event);
 
     if (event.produces) {

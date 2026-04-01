@@ -80,7 +80,13 @@ export class SQLiteAdapter implements EventStoreAdapter {
     if (filter.author     !== undefined) { conditions.push("author = ?");       params.push(filter.author); }
     if (filter.authorType !== undefined) { conditions.push("author_type = ?");  params.push(filter.authorType); }
     if (filter.since      !== undefined) { conditions.push("created_at >= ?");  params.push(filter.since); }
-    if (filter.source     !== undefined) { conditions.push("source LIKE ?");    params.push(`${filter.source}%`); }
+    if (filter.source     !== undefined) {
+      // Escape SQL LIKE special chars (%, _, \) before appending the % wildcard.
+      // Without escaping, a caller-supplied % or _ would act as a wildcard itself.
+      const escaped = filter.source.replace(/[\\%_]/g, "\\$&");
+      conditions.push("source LIKE ? ESCAPE '\\'");
+      params.push(`${escaped}%`);
+    }
 
     const where = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
     const rows  = this.db

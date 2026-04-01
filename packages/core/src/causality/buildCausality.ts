@@ -12,6 +12,8 @@
 //   derives_from:   LineageId = hash(parent_LineageId + eventId)
 //   その他:         新しい LineageId = hash(eventId)  ← 独立した線形チェーン
 
+import { createHash } from "node:crypto";
+
 import type { DecisionEvent } from "../domain/types.js";
 import type { EventId } from "../domain/ids.js";
 import {
@@ -22,17 +24,13 @@ import {
   type CausalEdge,
 } from "./types.js";
 
-// ── 軽量 hash（外部依存なし） ─────────────────────────────────────────────────
-// Constitution §11 では「deterministic hash」と定義している。
-// crypto がないため djb2 変種を使う。本番環境では SHA-256 に替えること。
+// ── 決定論的ハッシュ（node:crypto SHA-256） ──────────────────────────────────
+// Constitution §11「deterministic hash」。
+// 16 hex 文字（64-bit）を LineageId として使用する。
+// node:crypto は Node.js 22+ で標準利用可能（外部依存なし）。
 
 function simpleHash(s: string): string {
-  let h = 5381;
-  for (let i = 0; i < s.length; i++) {
-    h = ((h << 5) + h) ^ s.charCodeAt(i);
-    h = h >>> 0; // 32bit unsigned
-  }
-  return h.toString(16).padStart(8, "0");
+  return createHash("sha256").update(s).digest("hex").slice(0, 16);
 }
 
 function lineageHash(parent: LineageId, eventId: string): LineageId {

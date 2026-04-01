@@ -26,7 +26,16 @@ export type SourceURI = Brand<string, "SourceURI">;
 export type AuthorId = Brand<string, "AuthorId">;
 
 // ── キャスト関数 ───────────────────────────────────────────────────────────
-// 型安全のための最小ラッパー。検証ロジックは emit() が担う。
+//
+// これらは TypeScript レベルの型付けのみを行う「unsafe cast」である。
+// 呼び出し時点では入力文字列の形式を検証しない。
+//
+// Security note:
+//   - EventId の UUIDv7 形式検証は emit() が担う。
+//   - これらの関数を通過しただけでは値の正当性は保証されない。
+//   - emit() を経由せずに Brand 値を直接ストアに渡すコードは、
+//     形式の保証なしに動作することを理解した上で使用すること。
+//   - 詳細は SECURITY.md「Brand types — no runtime enforcement」を参照。
 
 export const asEventId    = (s: string): EventId    => s as EventId;
 export const asTraceIdRef = (s: string): TraceIdRef => s as TraceIdRef;
