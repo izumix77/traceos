@@ -3,11 +3,11 @@
 > append-only causal evidence ledger
 > "Truth emerges outside the kernel."
 
-**Status:** v0.5.1 · Apache 2.0
+**Status:** v0.5.3 · Apache 2.0
 **Compatible with:** DecisionGraph Core v0.4
 
 ---
-> ⚠️ **Status: Work in Progress (v0.5.0 development)**
+> ⚠️ **Status: Work in Progress**
 >
 > This is an active implementation in progress.
 > API and behavior may change frequently.
@@ -163,6 +163,30 @@ traceos log                 --dir .traceos/events --type ArchitectureDecision
 traceos replay              --dir .traceos/events --at C:commit-001
 traceos why     N:adr-001   --dir .traceos/events --changed
 traceos audit               --dir .traceos/events
+```
+
+---
+
+## セキュリティ
+
+詳細は [SECURITY.md](./SECURITY.md) を参照してください。
+
+主要ポイント：
+
+- **`payload` は未検証** — カーネルはそのまま保存します。消費側がレンダリング前にサニタイズしてください。
+- **シングルスレッド前提** — `emit()` は `runtime.dgcStore` を同期的に変更します。複数の Worker 間でランタイムを共有しないでください。
+- **`as*` キャスト関数**（`asEventId`・`asAuthorId` 等）はランタイム検証を行いません。検証は `emit()` 内で実施されます。
+- **`auditExportJSON`** はデフォルトでイベントデータ全体を出力します。非特権コンシューマへの開示時は `{ includePayload: false }` を使用してください。
+
+```ts
+// インメモリストアのサイズを制限する
+const store = createEventStore({ maxSize: 10_000 });
+
+// replay のメモリ枯渇防止
+const result = replay(events, { policy, maxEvents: 50_000 });
+
+// 監査エクスポートから payload を除外する
+const json = auditExportJSON(store, dgcStore, indexes, { includePayload: false });
 ```
 
 ---

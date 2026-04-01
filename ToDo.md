@@ -2,21 +2,14 @@
 
 TraceOS is evolving from a causal logging system into a responsibility infrastructure.
 
-Last updated: 2026-03-30
-Current status: `@trace-os/core` v0.5.2 — Phase A–B integration tests passing
+Last updated: 2026-04-02
+Current status: `@trace-os/core` v0.5.3 — security fixes published to npm
 
 ---
 
 ## 🔴 Immediate (Next Session)
 
-### 1. Ensure build output integrity
-- [ ] Run `pnpm build` and verify `dist/` artifacts
-- [ ] Confirm `dist/index.js` and `dist/index.d.ts` are generated correctly
-- [ ] Ensure other packages can consume `@trace-os/core` via workspace resolution
-
----
-
-### 2. FlowMemo integration
+### 1. FlowMemo integration
 - [ ] Invoke `FlowMemoConnector.emitReviewComment()` from React UI
 - [ ] Define mapping:
   - FlowJSON node/edge operations → `produces.ops`
@@ -112,7 +105,6 @@ Current status: `@trace-os/core` v0.5.2 — Phase A–B integration tests passin
 ---
 
 ### 11. EventLineageIndex evolution (Phase 5+)
-- [ ] Replace hash with SHA-256 for `LineageId`
 - [ ] Improve `traceLineage()`:
   - full graph visualization
 - [ ] Enable AI reasoning audit:
@@ -121,8 +113,6 @@ Current status: `@trace-os/core` v0.5.2 — Phase A–B integration tests passin
 ---
 
 ### 12. Ecosystem development
-- [ ] Publish `@trace-os/core` to npm
-- [ ] Publish `@trace-os/cli` (`npx traceos`)
 - [ ] GitHub Actions CI:
   - `pnpm test`
   - `pnpm typecheck`
@@ -143,3 +133,7 @@ Current status: `@trace-os/core` v0.5.2 — Phase A–B integration tests passin
 - [x] Windows compatibility fixes
 - [x] Node.js type compatibility fixes (`node:sqlite`)
 - [x] Phase A–B integration tests: emit → applyBatch → GraphStore, cross-graph edges
+- [x] Build output verified (`pnpm build` passes, dist/ artifacts confirmed)
+- [x] Security audit & fixes (v0.5.3): UUID regex, typeof guards, LIKE escape, iterative DFS, SHA-256 LineageId, maxEvents/maxSize limits, includePayload option, CLI size guard, SECURITY.md
+- [x] `@trace-os/core` published to npm (v0.5.3)
+- [x] `@trace-os/cli` published to npm (v0.5.3)

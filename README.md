@@ -3,11 +3,11 @@
 > append-only causal evidence ledger
 > "Truth emerges outside the kernel."
 
-**Status:** v0.5.1 · Apache 2.0
+**Status:** v0.5.3 · Apache 2.0
 **Compatible with:** DecisionGraph Core v0.4
 
 ---
-> ⚠️ **Status: Work in Progress (v0.5.0 development)**
+> ⚠️ **Status: Work in Progress**
 >
 > This is an active implementation in progress.
 > API and behavior may change frequently.
@@ -212,6 +212,30 @@ traceos log                 --dir .traceos/events
 traceos replay              --dir .traceos/events
 traceos why     <nodeId>    --dir .traceos/events
 traceos audit               --dir .traceos/events
+```
+
+---
+
+## Security
+
+See [SECURITY.md](./SECURITY.md) for the full security model.
+
+Key points:
+
+- **`payload` is untrusted** — the kernel stores it as-is. Consumers must sanitize before rendering.
+- **Single-threaded** — `emit()` mutates `runtime.dgcStore` synchronously. Do not share a runtime across Workers.
+- **`as*` cast functions** (`asEventId`, `asAuthorId`, …) perform no runtime validation. Validation happens inside `emit()`.
+- **`auditExportJSON`** includes full event data by default. Use `{ includePayload: false }` when exporting to untrusted consumers.
+
+```ts
+// Limit in-memory store size
+const store = createEventStore({ maxSize: 10_000 });
+
+// Cap replay to avoid memory exhaustion
+const result = replay(events, { policy, maxEvents: 50_000 });
+
+// Strip payload from audit export
+const json = auditExportJSON(store, dgcStore, indexes, { includePayload: false });
 ```
 
 ---

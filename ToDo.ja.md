@@ -1,18 +1,13 @@
 # TraceOS — TODO
 
-最終更新: 2026-03-30
-現在地: `@trace-os/core` v0.5.2 — Phase A–B 統合テスト通過済み
+最終更新: 2026-04-02
+現在地: `@trace-os/core` v0.5.3 — セキュリティ修正 npm 公開済み
 
 ---
 
 ## 🔴 直近（次のセッション）
 
-### 1. `pnpm build` を通す
-- [ ] `tsc -b` で `dist/` を生成する
-- [ ] `dist/index.js` / `dist/index.d.ts` が正しく出力されることを確認
-- [ ] 他パッケージから `@trace-os/core` として参照できる形にする
-
-### 2. FlowMemo への接続
+### 1. FlowMemo への接続
 - [ ] FlowMemo の React UI から `FlowMemoConnector.emitReviewComment()` を呼ぶ
 - [ ] Edge 重記モードのイベント設計を確定する
   - `FlowJSON` のノード・エッジ操作 → `produces.ops` への変換ロジック
@@ -86,13 +81,10 @@
 - [ ] TraceID 信頼度スコアとの接続
 
 ### 11. EventLineageIndex の高度化（Phase 5+）
-- [ ] LineageId の SHA-256 実装（現在は djb2 簡易 hash）
 - [ ] `traceLineage()` の改善: derives_from チェーンを graph として可視化
 - [ ] AI 推論監査: 思考 → 決定の完全チェーン
 
 ### 12. エコシステム整備
-- [ ] `@trace-os/core` を npm publish
-- [ ] `@trace-os/cli` を npm publish（`npx traceos` で動くように）
 - [ ] GitHub Actions CI（`pnpm test` + `pnpm typecheck`）
 - [ ] Constitution v0.6 の英語正式版ドキュメント公開
 
@@ -111,3 +103,7 @@
 - [x] Windows 環境対応（moduleResolution: Bundler / os.tmpdir()）
 - [x] @types/node 対応（node:sqlite 型エラー修正）
 - [x] Phase A–B 統合テスト: emit → applyBatch → GraphStore、cross-graph edge 解決
+- [x] ビルド確認（`pnpm build` 通過、dist/ 成果物確認済み）
+- [x] セキュリティ監査・修正（v0.5.3）: UUID 正規表現・typeof ガード・LIKE エスケープ・反復 DFS・SHA-256 LineageId・maxEvents / maxSize・includePayload・CLI サイズ制限・SECURITY.md 追加
+- [x] `@trace-os/core` npm publish 済み（v0.5.3）
+- [x] `@trace-os/cli` npm publish 済み（v0.5.3）
