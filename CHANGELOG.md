@@ -4,6 +4,13 @@ All notable changes to this project are documented here.
 
 ---
 
+## [0.5.4] - 2026-04-02
+
+### Fixed
+- `packages/cli` — Published dist files incorrectly imported `@traceos/core` (missing hyphen) instead of `@trace-os/core`, causing `ERR_MODULE_NOT_FOUND` on clean install. Root cause: dist was compiled before the package rename and not rebuilt before publish. Rebuilt and republished with correct import paths.
+
+---
+
 ## [0.5.3] - 2026-04-02
 
 ### Security

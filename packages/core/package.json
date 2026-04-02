@@ -1,6 +1,6 @@
 {
   "name": "@trace-os/core",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "append-only causal evidence ledger — WHY engine for DecisionGraph Core",
   "type": "module",
   "license": "Apache-2.0",

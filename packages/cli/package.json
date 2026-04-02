@@ -1,6 +1,6 @@
 {
   "name": "@trace-os/cli",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "CLI for @trace-os/core — traceos emit / log / replay / why / audit",
   "type": "module",
   "license": "Apache-2.0",

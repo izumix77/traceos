@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [0.5.4] - 2026-04-02
+
+### Fixed
+- `packages/cli` — 公開済み dist ファイルが `@trace-os/core`（ハイフンあり）ではなく `@traceos/core`（ハイフンなし）をインポートしており、クリーンインストール時に `ERR_MODULE_NOT_FOUND` が発生していた。原因はパッケージ名変更前のビルド成果物を再ビルドせずに publish したこと。正しいインポートパスで再ビルド・再 publish。
+
+---
+
 ## [0.5.3] - 2026-04-02
 
 ### セキュリティ
