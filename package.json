@@ -8,7 +8,7 @@
     "build": "pnpm --filter @trace-os/core build"
   },
   "devDependencies": {
-    "@types/node": "^25.5.0",
+    "@types/node": "^25.5.2",
     "rimraf": "^6.1.3",
     "typescript": "^5.4.0"
   },
