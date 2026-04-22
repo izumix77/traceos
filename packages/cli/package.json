@@ -17,7 +17,7 @@
   "@trace-os/core": "workspace:*"
   },
   "devDependencies": {
-    "typescript": ">=5.4.0"
+    "typescript": ">=6.0.3"
   },
   "engines": {
     "node": ">=22.0.0"
