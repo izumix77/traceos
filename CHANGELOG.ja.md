@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [0.5.5] - 2026-05-12
+
+### Added
+- `src/lint.ts` — no-op スタブを本実装に置き換え。`@decisiongraph/core` の `lintStore(store, policy)` に no-op caller policy を渡して委譲。DGC の `ConstitutionalPolicy.validateStore` が `effectiveStatus()` トポロジー導出による `DEPENDENCY_ON_SUPERSEDED` を TraceOS の `lintStore()` 経由で返すようになった。
+  - **設計メモ**: caller policy を no-op にする理由は、DGC が内部の `ConstitutionalPolicy` と caller の policy を連結するため、caller にも `ConstitutionalPolicy` を渡すと全 violation が2重カウントされるから。
+- 統合テスト — Phase C: `DEPENDENCY_ON_SUPERSEDED` の検知と TraceOS イベントへの記録（`test/integration/dgc.test.ts`）
+  - 検証内容: 検知 → `CollapseDetected` emit → replay 後も同一 violation
+  - 循環依存検知が DGC の責任のままであることを確認
+
+### Fixed
+- `TraceOS_ToDo.md` — Phase C の「DGC 待ち」ブロッカーを削除。Phase C 完了。
+- `.gitignore` — `.claude/` を追加
+
+### Tests
+- **60 passed**（既存 59 + Phase C 統合テスト 1 追加）
+
+---
+
 ## [0.5.4] - 2026-04-02
 
 ### Fixed

@@ -2,6 +2,25 @@
 
 All notable changes to this project are documented here.
 
+
+---
+
+## [0.5.5] - 2026-05-12
+
+### Added
+- `src/lint.ts` — replaced no-op stub with real implementation delegating to `@decisiongraph/core`'s `lintStore(store, policy)` via a no-op caller policy. DGC's `ConstitutionalPolicy.validateStore` now surfaces `DEPENDENCY_ON_SUPERSEDED` (topology-derived via `effectiveStatus()`) through TraceOS's `lintStore()`.
+  - **Design note**: caller policy is a no-op because DGC concatenates its internal `ConstitutionalPolicy` with the caller's policy; passing another `ConstitutionalPolicy` would double-count every violation.
+- Integration test — Phase C: `DEPENDENCY_ON_SUPERSEDED` is detected and recorded as a TraceOS event (`test/integration/dgc.test.ts`)
+  - Verifies: detect → `CollapseDetected` emit → replay invariance
+  - Confirms: circular dependency detection remains solely a DGC responsibility
+
+### Fixed
+- `TraceOS_ToDo.md` — removed stale "waiting on DGC" blocker for Phase C; Phase C is now complete
+- `.gitignore` — added `.claude/` entry
+
+### Tests
+- **60 passed** (59 existing + 1 new Phase C integration test)
+
 ---
 
 ## [0.5.4] - 2026-04-02
