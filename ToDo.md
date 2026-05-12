@@ -28,14 +28,6 @@ Current status: `@trace-os/core` v0.5.3 — security fixes published to npm
 
 ## 🟡 Mid-term
 
-### 4. Phase C: effectiveStatus topology derivation (deferred)
-- [ ] Wait for DGC Constitutional Policy implementation of `DEPENDENCY_ON_SUPERSEDED`
-- [ ] Confirm TraceOS can ingest DGC `lintStore()` results without embedding policy logic
-- [ ] Add integration test only after DGC Phase C is available
-- [ ] Confirm circular dependency detection remains solely a DGC responsibility
-
----
-
 ### 5. Phase D: DGC violation propagation (kernel-neutral)
 - [ ] DGC `lintStore()` returns violations → TraceOS records as `PolicyViolationDetected` event
 - [ ] Verify: `emit()` accepts violation objects without interpreting them
@@ -133,6 +125,8 @@ Current status: `@trace-os/core` v0.5.3 — security fixes published to npm
 - [x] Windows compatibility fixes
 - [x] Node.js type compatibility fixes (`node:sqlite`)
 - [x] Phase A–B integration tests: emit → applyBatch → GraphStore, cross-graph edges
+- [x] Phase C: effectiveStatus topology derivation — `lintStore()` delegates to DGC's `ConstitutionalPolicy.validateStore()`, surfacing `DEPENDENCY_ON_SUPERSEDED` derived from `effectiveStatus()` topology. Integration test verifies detect → CollapseDetected emit → replay invariance. Circular dependency detection remains solely a DGC responsibility.
+  - **Design note**: `src/lint.ts` passes a **no-op `Policy`** to DGC's `lintStore(store, policy)`. DGC concatenates its internal `ConstitutionalPolicy.validateStore` with the caller's `policy.validateStore`, so passing another `ConstitutionalPolicy` would double-count every violation. The no-op caller policy is the correct pattern when TraceOS only wants to surface DGC's constitutional violations without adding policy logic of its own.
 - [x] Build output verified (`pnpm build` passes, dist/ artifacts confirmed)
 - [x] Security audit & fixes (v0.5.3): UUID regex, typeof guards, LIKE escape, iterative DFS, SHA-256 LineageId, maxEvents/maxSize limits, includePayload option, CLI size guard, SECURITY.md
 - [x] `@trace-os/core` published to npm (v0.5.3)

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(head -20 /f/OSS_project/traceos/.github/workflows/*.yml)",
+      "Bash(pnpm test:*)",
+      "Bash(npm show:*)",
+      "Bash(npm whoami:*)",
+      "Bash(grep -rn @trace-os/ F:/OSS_project/traceos --include=*.ts --include=*.json --include=*.md --include=*.yaml --include=*.yml --exclude-dir=node_modules)",
+      "Bash(pnpm install:*)"
+    ]
+  }
+}

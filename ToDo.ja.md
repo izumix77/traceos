@@ -22,14 +22,6 @@
 
 ## 🟡 中期
 
-### 4. Phase C: effectiveStatus トポロジー導出（延期）
-- [ ] DGC Constitutional Policy での `DEPENDENCY_ON_SUPERSEDED` 実装を待つ
-- [ ] TraceOS が DGC `lintStore()` の結果を policy ロジック埋め込みなしで受け取れるか確認
-- [ ] DGC Phase C が利用可能になった後に統合テストを追加
-- [ ] 循環依存検知が DGC の責任のままであることを確認
-
----
-
 ### 5. Phase D: DGC violation 伝搬（kernel-neutral）
 - [ ] DGC `lintStore()` が violation を返す → TraceOS が `PolicyViolationDetected` event として記録
 - [ ] 検証: `emit()` が violation object を解釈せず受け取れる
@@ -103,6 +95,8 @@
 - [x] Windows 環境対応（moduleResolution: Bundler / os.tmpdir()）
 - [x] @types/node 対応（node:sqlite 型エラー修正）
 - [x] Phase A–B 統合テスト: emit → applyBatch → GraphStore、cross-graph edge 解決
+- [x] Phase C: effectiveStatus トポロジー導出 — `lintStore()` が DGC の `ConstitutionalPolicy.validateStore()` に委譲し、`effectiveStatus()` トポロジーから導出された `DEPENDENCY_ON_SUPERSEDED` を返す。統合テストで「検知 → `CollapseDetected` emit → replay 後も同一 violation」を確認済み。循環依存検知は DGC の責任のままであることを確認。
+  - **設計メモ**: `src/lint.ts` は DGC の `lintStore(store, policy)` に **no-op Policy** を渡す。DGC は内部の `ConstitutionalPolicy.validateStore` と caller の `policy.validateStore` を連結するため、caller にも `ConstitutionalPolicy` を渡すと全 violation が2重カウントされる。TraceOS 側に独自の policy ロジックを持たず DGC の constitutional violation のみを surfacing したい場合、no-op caller policy が正しいパターン。
 - [x] ビルド確認（`pnpm build` 通過、dist/ 成果物確認済み）
 - [x] セキュリティ監査・修正（v0.5.3）: UUID 正規表現・typeof ガード・LIKE エスケープ・反復 DFS・SHA-256 LineageId・maxEvents / maxSize・includePayload・CLI サイズ制限・SECURITY.md 追加
 - [x] `@trace-os/core` npm publish 済み（v0.5.3）
