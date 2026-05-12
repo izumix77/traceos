@@ -47,3 +47,6 @@ coverage/
 # Misc
 *.bak
 *.swp
+
+# Claude Code
+.claude/
