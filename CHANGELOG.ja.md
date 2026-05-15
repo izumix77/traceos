@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+
+## [0.5.5] - 2026-05-15
+
+### Added
+- `src/lint.ts` — no-op スタブを本実装に置き換え。`@decisiongraph/core` の `lintStore(store, policy)` に no-op caller policy を渡して委譲。DGC の `ConstitutionalPolicy.validateStore` が `effectiveStatus()` トポロジー導出による `DEPENDENCY_ON_SUPERSEDED` を TraceOS の `lintStore()` 経由で返すようになった。
+  - **設計メモ**: caller policy を no-op にする理由は、DGC が内部の `ConstitutionalPolicy` と caller の policy を連結するため、caller にも `ConstitutionalPolicy` を渡すと全 violation が2重カウントされるから。
+- 統合テスト — Phase C: `DEPENDENCY_ON_SUPERSEDED` の検知と TraceOS イベントへの記録（`test/integration/dgc.test.ts`）
+  - 検証内容: 検知 → `CollapseDetected` emit → replay 後も同一 violation
+  - 循環依存検知が DGC の責任のままであることを確認
+
+### Fixed
+- `TraceOS_ToDo.md` — Phase C の「DGC 待ち」ブロッカーを削除。Phase C 完了。
+- `.gitignore` — `.claude/` を追加
+
+### CI
+- `ci.yml` と `security-audit.yml` を新規作成（このリポジトリに CI がなかった）
+- ルート `package.json` に `"packageManager": "pnpm@9.0.0"` を追加（`pnpm/action-setup@v5` に必要）
+- 全 actions を v5 に統一: `actions/checkout@v5`、`actions/setup-node@v5`、`pnpm/action-setup@v5`
+- Node.js 22
+
+### Tests
+- **60 passed**（既存 59 + Phase C 統合テスト 1 追加）
+
+---
+
 ## [0.5.5] - 2026-05-12
 
 ### Added

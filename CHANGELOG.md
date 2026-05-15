@@ -2,6 +2,29 @@
 
 All notable changes to this project are documented here.
 
+---
+
+## [0.5.5] - 2026-05-15
+
+### Added
+- `src/lint.ts` — replaced no-op stub with real implementation delegating to `@decisiongraph/core`'s `lintStore(store, policy)` via a no-op caller policy. DGC's `ConstitutionalPolicy.validateStore` now surfaces `DEPENDENCY_ON_SUPERSEDED` (topology-derived via `effectiveStatus()`) through TraceOS's `lintStore()`.
+  - **Design note**: caller policy is a no-op because DGC concatenates its internal `ConstitutionalPolicy` with the caller's policy; passing another `ConstitutionalPolicy` would double-count every violation.
+- Integration test — Phase C: `DEPENDENCY_ON_SUPERSEDED` is detected and recorded as a TraceOS event (`test/integration/dgc.test.ts`)
+  - Verifies: detect → `CollapseDetected` emit → replay invariance
+  - Confirms: circular dependency detection remains solely a DGC responsibility
+
+### Fixed
+- `TraceOS_ToDo.md` — removed stale "waiting on DGC" blocker for Phase C; Phase C is now complete
+- `.gitignore` — added `.claude/` entry
+
+### CI
+- Added `ci.yml` and `security-audit.yml` GitHub Actions workflows (repo had no CI previously)
+- Added `"packageManager": "pnpm@9.0.0"` to root `package.json` (required by `pnpm/action-setup@v5`)
+- All actions use v5: `actions/checkout@v5`, `actions/setup-node@v5`, `pnpm/action-setup@v5`
+- Node.js 22
+
+### Tests
+- **60 passed** (59 existing + 1 new Phase C integration test)
 
 ---
 
