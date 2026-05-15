@@ -1,6 +1,6 @@
 {
   "name": "@trace-os/cli",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "description": "CLI for @trace-os/core — traceos emit / log / replay / why / audit",
   "type": "module",
   "license": "Apache-2.0",
@@ -14,7 +14,7 @@
     "clean":     "rm -rf dist"
   },
   "dependencies": {
-  "@trace-os/core": "workspace:*"
+  "@trace-os/core": "^0.5.5"
   },
   "devDependencies": {
     "typescript": ">=5.4.0"
