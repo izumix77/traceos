@@ -95,9 +95,7 @@
   - **設計メモ**: `src/lint.ts` は DGC の `lintStore(store, policy)` に **no-op Policy** を渡す。DGC は内部の `ConstitutionalPolicy.validateStore` と caller の `policy.validateStore` を連結するため、caller にも `ConstitutionalPolicy` を渡すと全 violation が2重カウントされる。TraceOS 側に独自の policy ロジックを持たず DGC の constitutional violation のみを surfacing したい場合、no-op caller policy が正しいパターン。
 - [x] ビルド確認（`pnpm build` 通過、dist/ 成果物確認済み）
 - [x] セキュリティ監査・修正（v0.5.3）: UUID 正規表現・typeof ガード・LIKE エスケープ・反復 DFS・SHA-256 LineageId・maxEvents / maxSize・includePayload・CLI サイズ制限・SECURITY.md 追加
-- [x] `@trace-os/core` npm publish 済み（v0.5.3）
-- [x] `@trace-os/cli` npm publish 済み（v0.5.3）
 - [x] GitHub Actions CI: `ci.yml` / `security-audit.yml` 追加（Node.js 22、pnpm/action-setup@v5）
-- [x] `@trace-os/core` npm publish 済み（v0.5.5）
-- [x] `@trace-os/cli` npm publish 済み（v0.5.6）— v0.5.5 の `workspace:*` 依存漏れを修正して再 publish
+- [x] `@trace-os/core` npm publish 済み（v0.5.3 → v0.5.5）
+- [x] `@trace-os/cli` npm publish 済み（v0.5.3 → v0.5.6）— v0.5.5 の `workspace:*` 依存漏れを修正して再 publish
 - [x] npm publish チェックリスト確立: クリーンインストール確認・依存漏れチェックを手順化

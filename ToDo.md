@@ -122,9 +122,7 @@ Current status: `@trace-os/core` v0.5.5 / `@trace-os/cli` v0.5.6 — Phase C com
   - **Design note**: `src/lint.ts` passes a **no-op `Policy`** to DGC's `lintStore(store, policy)`. DGC concatenates its internal `ConstitutionalPolicy.validateStore` with the caller's `policy.validateStore`, so passing another `ConstitutionalPolicy` would double-count every violation. The no-op caller policy is the correct pattern when TraceOS only wants to surface DGC's constitutional violations without adding policy logic of its own.
 - [x] Build output verified (`pnpm build` passes, dist/ artifacts confirmed)
 - [x] Security audit & fixes (v0.5.3): UUID regex, typeof guards, LIKE escape, iterative DFS, SHA-256 LineageId, maxEvents/maxSize limits, includePayload option, CLI size guard, SECURITY.md
-- [x] `@trace-os/core` published to npm (v0.5.3)
-- [x] `@trace-os/cli` published to npm (v0.5.3)
 - [x] GitHub Actions CI: `ci.yml` and `security-audit.yml` added (Node.js 22, pnpm/action-setup@v5)
-- [x] `@trace-os/core` published to npm (v0.5.5)
-- [x] `@trace-os/cli` published to npm (v0.5.6) — fixed `workspace:*` dependency leak from v0.5.5
+- [x] `@trace-os/core` published to npm (v0.5.3 → v0.5.5)
+- [x] `@trace-os/cli` published to npm (v0.5.3 → v0.5.6) — fixed `workspace:*` dependency leak from v0.5.5
 - [x] npm publish checklist established: clean install verification, dependency leak check
