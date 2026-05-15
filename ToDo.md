@@ -2,8 +2,8 @@
 
 TraceOS is evolving from a causal logging system into a responsibility infrastructure.
 
-Last updated: 2026-04-02
-Current status: `@trace-os/core` v0.5.3 — security fixes published to npm
+Last updated: 2026-05-15
+Current status: `@trace-os/core` v0.5.5 / `@trace-os/cli` v0.5.6 — Phase C complete, CI added
 
 ---
 
@@ -102,13 +102,6 @@ Current status: `@trace-os/core` v0.5.3 — security fixes published to npm
 - [ ] Enable AI reasoning audit:
   - thought → decision → outcome chain
 
----
-
-### 12. Ecosystem development
-- [ ] GitHub Actions CI:
-  - `pnpm test`
-  - `pnpm typecheck`
-- [ ] Publish official English Constitution (v0.6)
 
 ---
 
@@ -131,3 +124,7 @@ Current status: `@trace-os/core` v0.5.3 — security fixes published to npm
 - [x] Security audit & fixes (v0.5.3): UUID regex, typeof guards, LIKE escape, iterative DFS, SHA-256 LineageId, maxEvents/maxSize limits, includePayload option, CLI size guard, SECURITY.md
 - [x] `@trace-os/core` published to npm (v0.5.3)
 - [x] `@trace-os/cli` published to npm (v0.5.3)
+- [x] GitHub Actions CI: `ci.yml` and `security-audit.yml` added (Node.js 22, pnpm/action-setup@v5)
+- [x] `@trace-os/core` published to npm (v0.5.5)
+- [x] `@trace-os/cli` published to npm (v0.5.6) — fixed `workspace:*` dependency leak from v0.5.5
+- [x] npm publish checklist established: clean install verification, dependency leak check

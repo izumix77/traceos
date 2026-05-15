@@ -1,7 +1,7 @@
 # TraceOS — TODO
 
-最終更新: 2026-04-02
-現在地: `@trace-os/core` v0.5.3 — セキュリティ修正 npm 公開済み
+最終更新: 2026-05-15
+現在地: `@trace-os/core` v0.5.5 / `@trace-os/cli` v0.5.6 — Phase C 完了、CI 追加
 
 ---
 
@@ -76,10 +76,6 @@
 - [ ] `traceLineage()` の改善: derives_from チェーンを graph として可視化
 - [ ] AI 推論監査: 思考 → 決定の完全チェーン
 
-### 12. エコシステム整備
-- [ ] GitHub Actions CI（`pnpm test` + `pnpm typecheck`）
-- [ ] Constitution v0.6 の英語正式版ドキュメント公開
-
 ---
 
 ## ✅ 完了済み
@@ -101,3 +97,7 @@
 - [x] セキュリティ監査・修正（v0.5.3）: UUID 正規表現・typeof ガード・LIKE エスケープ・反復 DFS・SHA-256 LineageId・maxEvents / maxSize・includePayload・CLI サイズ制限・SECURITY.md 追加
 - [x] `@trace-os/core` npm publish 済み（v0.5.3）
 - [x] `@trace-os/cli` npm publish 済み（v0.5.3）
+- [x] GitHub Actions CI: `ci.yml` / `security-audit.yml` 追加（Node.js 22、pnpm/action-setup@v5）
+- [x] `@trace-os/core` npm publish 済み（v0.5.5）
+- [x] `@trace-os/cli` npm publish 済み（v0.5.6）— v0.5.5 の `workspace:*` 依存漏れを修正して再 publish
+- [x] npm publish チェックリスト確立: クリーンインストール確認・依存漏れチェックを手順化
