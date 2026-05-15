@@ -3,7 +3,7 @@
 > append-only causal evidence ledger
 > "Truth emerges outside the kernel."
 
-**Status:** v0.5.3 · Apache 2.0
+**Status:** v0.5.5 · Apache 2.0
 **Compatible with:** DecisionGraph Core v0.4
 
 ---
