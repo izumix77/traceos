@@ -50,3 +50,5 @@ coverage/
 
 # Claude Code
 .claude/
+
+AGENTS.md

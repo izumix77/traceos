@@ -3,6 +3,12 @@
 All notable changes to this project are documented here.
 
 ---
+## [0.5.6] - 2026-05-15
+
+### Fixed
+- `packages/cli` — `@trace-os/core` dependency was published as `workspace:*` in v0.5.5; replaced with explicit `^0.5.5`
+
+---
 
 ## [0.5.5] - 2026-05-15
 
@@ -14,7 +20,6 @@ All notable changes to this project are documented here.
   - Confirms: circular dependency detection remains solely a DGC responsibility
 
 ### Fixed
-- `TraceOS_ToDo.md` — removed stale "waiting on DGC" blocker for Phase C; Phase C is now complete
 - `.gitignore` — added `.claude/` entry
 
 ### CI

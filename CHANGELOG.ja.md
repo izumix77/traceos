@@ -3,7 +3,12 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [0.5.6] - 2026-05-15
 
+### 修正
+- `packages/cli` — v0.5.5 で `@trace-os/core` の依存が `workspace:*` のまま publish されていた。`^0.5.5` に修正して再 publish。
+
+---
 
 ## [0.5.5] - 2026-05-15
 
@@ -14,8 +19,7 @@ All notable changes to this project will be documented in this file.
   - 検証内容: 検知 → `CollapseDetected` emit → replay 後も同一 violation
   - 循環依存検知が DGC の責任のままであることを確認
 
-### Fixed
-- `TraceOS_ToDo.md` — Phase C の「DGC 待ち」ブロッカーを削除。Phase C 完了。
+### 修正
 - `.gitignore` — `.claude/` を追加
 
 ### CI
